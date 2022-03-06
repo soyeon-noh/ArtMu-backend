@@ -4,14 +4,14 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TwitterConfig {
-  constructor(private configService: ConfigService) {}
+	constructor(private configService: ConfigService) { }
 
-  // OAuth2
-  client = new TwitterApi(this.configService.get<string>(`BEARER_TOKEN`));
+	// OAuth2
+	client = new TwitterApi(this.configService.get<string>(`BEARER_TOKEN`));
 
-  // // Read+Write level
-  // const rwClient = client.readWrite;
+	// // Read+Write level
+	// const rwClient = client.readWrite;
 
-  // // Read-only level
-  // const roClient = client.readOnly;
+	// // Read-only level
+	// const roClient = client.readOnly;
 }

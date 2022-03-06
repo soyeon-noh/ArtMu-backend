@@ -1,41 +1,32 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { TweetService } from './tweet.service';
-import { CreateTweetDto } from './dto/create-tweet.dto';
-import { UpdateTweetDto } from './dto/update-tweet.dto';
-
+import { plainToInstance } from 'class-transformer';
+import { TweetDTO } from './dto/tweet.dto';
 @Controller('tweet')
 export class TweetController {
-  constructor(private readonly tweetService: TweetService) {}
+	constructor(private tweetService: TweetService) { }
 
-  // #커미션 해시태그 단 트윗 불러오기
-  @Get()
-  findAll() {
-    const result = this.tweetService.search('#커미션');
+	// #커미션 해시태그 단 트윗 불러오기
+	@Get()
+	async findAll() {
+		const tweet = await this.tweetService.search('#커미션');
 
-    return this.tweetService.search('#커미션');
-  }
+		return plainToInstance(TweetDTO, tweet.tweets);
+	}
 
-  // +id number로 치환
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tweetService.findOne(+id);
-  }
+	// +id number로 치환
+	@Get(':id')
+	findOne(@Param('id') id: string) {
+		return this.tweetService.findOne(+id);
+	}
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateTweetDto: UpdateTweetDto) {
-  //   return this.tweetService.update(+id, updateTweetDto);
-  // }
+	// @Patch(':id')
+	// update(@Param('id') id: string, @Body() updateTweetDto: UpdateTweetDto) {
+	//   return this.tweetService.update(+id, updateTweetDto);
+	// }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tweetService.remove(+id);
-  }
+	@Delete(':id')
+	remove(@Param('id') id: string) {
+		return this.tweetService.remove(+id);
+	}
 }
