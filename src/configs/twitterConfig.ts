@@ -7,11 +7,11 @@ export class TwitterConfig {
   constructor(private configService: ConfigService) {}
 
   // OAuth2
-  twitterClient = new TwitterApi(
-    this.configService.get<string>(`BEARER_TOKEN`),
-  );
-  // token이 안 넘어오는 문제 발생
+  client = new TwitterApi(this.configService.get<string>(`BEARER_TOKEN`));
 
-  // Read-only level
-  // const roClient = twitterClient.readOnly
+  // // Read+Write level
+  // const rwClient = client.readWrite;
+
+  // // Read-only level
+  // const roClient = client.readOnly;
 }
