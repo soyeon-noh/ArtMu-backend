@@ -5,14 +5,16 @@ import { AppService } from './app.service';
 import { TwitterConfig } from './configs/twitterConfig';
 import { DesignerModule } from './designer/designer.module';
 import { TweetModule } from './tweet/tweet.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    DesignerModule,
-    TweetModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService, TwitterConfig],
+	imports: [
+		ConfigModule.forRoot({ isGlobal: true }),
+		DesignerModule,
+		TweetModule,
+		AppRoutingModule,
+	],
+	controllers: [AppController],
+	providers: [AppService, TwitterConfig],
 })
-export class AppModule {}
+export class AppModule { }

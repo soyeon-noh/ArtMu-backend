@@ -2,7 +2,7 @@ import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { TweetService } from './tweet.service';
 import { plainToInstance } from 'class-transformer';
 import { TweetDTO } from './dto/tweet.dto';
-@Controller('tweet')
+@Controller()
 export class TweetController {
 	constructor(private tweetService: TweetService) { }
 
