@@ -1,3 +1,6 @@
 [submodule "src/interface"]
 	path = src/interface
 	url = https://github.com/kimyoungjin98/ArtMu-interface.git
+[submodule "ArtMu-interface"]
+	path = ArtMu-interface
+	url = https://github.com/kimyoungjin98/ArtMu-interface.git
