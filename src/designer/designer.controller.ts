@@ -1,14 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
+import { IPaginationDTO } from 'src/interface/dto/pagination.dto';
+import { TweetService } from 'src/tweet/tweet.service';
 import { DesignerService } from './designer.service';
-import { CreateDesignerDto } from './dto/create-designer.dto';
-import { UpdateDesignerDto } from './dto/update-designer.dto';
 
 @Controller()
 export class DesignerController {
-	constructor(private designerService: DesignerService) { }
+	constructor(
+		private designerService: DesignerService,
+		private tweetService: TweetService,
+	) { }
 
 	@Get()
-	findAll() {
+	async findAll(
+		@Query('pageSize') pageSize: number,
+		@Query('pageNo') pageNo: number,
+		@Query('query') query?: string,
+	) {
 
 	}
 
