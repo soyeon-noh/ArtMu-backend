@@ -6,6 +6,7 @@ import { TwitterConfig } from './configs/twitterConfig';
 import { DesignerModule } from './designer/designer.module';
 import { TweetModule } from './tweet/tweet.module';
 import { AppRoutingModule } from './app-routing.module';
+import { FirebaseConfig } from './configs/firebaseConfig';
 
 @Module({
 	imports: [
@@ -15,6 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 		AppRoutingModule,
 	],
 	controllers: [AppController],
-	providers: [AppService, TwitterConfig],
+	providers: [AppService, TwitterConfig, FirebaseConfig],
 })
 export class AppModule { }
