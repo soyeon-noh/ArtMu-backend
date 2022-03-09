@@ -17,9 +17,17 @@ export class TweetController {
 
   // #커미션 해시태그 단 트윗 불러오기
   @Get()
-  findAll() {
-    const result = this.tweetService.search('#커미션');
+  async findAll() {
+    const result = await this.tweetService.search('#커미션');
+    // console.log('결과', result);
+    const resultData = result.data.data;
 
+    // let resultDataId;
+    // for (let data in resultData) {
+
+    // data.id
+    // }
+    console.log(resultData);
     return this.tweetService.search('#커미션');
   }
 
