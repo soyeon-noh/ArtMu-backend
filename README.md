@@ -11,3 +11,21 @@ A website where you can promote commissions on Twitter or find them accurately a
 git ls-files --stage src/interface
 git rm --cached src/interface
 ```
+
+## submodule 
+
+- 서브모듈 추가 
+``` 
+git submodule add <repository url> <추가할 경로>
+```
+
+- 서브모듈 업데이트(pull)
+```
+git submodule update --remote
+```
+
+- clone한 프로젝트에서 서브모듈 업데이트(pull)
+```
+git submodule init
+git submodule update --remote
+```
