@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TweetService } from './tweet.service';
+import { EnvironmentModule } from 'src/environment/environment.module';
 import { TweetController } from './tweet.controller';
-import { ConfigModule } from '@nestjs/config';
-import { TwitterConfig } from 'src/configs/twitterConfig';
+import { TweetService } from './tweet.service';
 
 @Module({
-  controllers: [TweetController],
-  providers: [TweetService, TwitterConfig],
+	imports: [EnvironmentModule],
+	controllers: [TweetController],
+	providers: [TweetService],
 })
-export class TweetModule {}
+export class TweetModule { }

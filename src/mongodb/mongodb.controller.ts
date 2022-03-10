@@ -3,5 +3,6 @@ import { MongodbService } from './mongodb.service';
 
 @Controller('mongodb')
 export class MongodbController {
-  constructor(private readonly mongodbService: MongodbService) {}
+
+	constructor(private readonly mongodbService: MongodbService) { }
 }

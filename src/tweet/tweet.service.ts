@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TwitterConfig } from 'src/configs/twitterConfig';
+import { EnvironmentService } from 'src/environment/environment.service';
 import {
 	TweetSearchRecentV2Paginator,
 	Tweetv2SearchParams
@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class TweetService {
-	constructor(private twitterConfig: TwitterConfig) { }
+	constructor(private envService: EnvironmentService) { }
 
 	// 단순 검색
 	async search(
@@ -16,7 +16,7 @@ export class TweetService {
 	): Promise<TweetSearchRecentV2Paginator> {
 		// const endTime: string = null;
 		// options = { ...options, end_time: `${endTime}` };
-		return await this.twitterConfig.client.readOnly.v2.search(query, options);
+		return await this.envService.getTwitterApi().readOnly.v2.search(query, options);
 	}
 
 	findAll() {
