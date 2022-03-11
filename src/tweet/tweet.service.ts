@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TwitterConfig } from 'src/configs/twitterConfig';
+import { EnvironmentService } from 'src/environment/environment.service';
 import {
   TweetSearchRecentV2Paginator,
   Tweetv2SearchParams,
@@ -27,6 +27,7 @@ export class TweetService {
     // options = { ...options, end_time: `${endTime}` };
     return await this.twitterConfig.client.readOnly.v2.search(query, option);
   }
+
 
   findAll() {
     return `This action returns all tweet`;

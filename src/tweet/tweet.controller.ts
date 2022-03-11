@@ -1,10 +1,8 @@
-import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { TweetService } from './tweet.service';
-import { plainToInstance } from 'class-transformer';
-import { TweetDTO } from './dto/tweet.dto';
-import { IPaginationDTO } from 'src/interface/dto/pagination.dto';
 @Controller()
 export class TweetController {
+
   constructor(private tweetService: TweetService) {}
 
   // #커미션 해시태그 단 트윗 불러오기
@@ -49,4 +47,4 @@ export class TweetController {
   remove(@Param('id') id: string) {
     return this.tweetService.remove(+id);
   }
-}
+
