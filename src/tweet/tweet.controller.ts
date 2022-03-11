@@ -9,34 +9,30 @@ export class TweetController {
 
   // #커미션 해시태그 단 트윗 불러오기
   @Get()
-  async findAll() {
+  async findAll(
+    @Query('pageSize') pageSize: number,
+    @Query('pageNo') pageNo: number,
+    @Query('query') query?: string,
+  ) {
     const result = await this.tweetService.search('#커미션');
-    // console.log('결과', result);
+
     const resultData = result.data.data;
+    const resultMeta = result.data.meta;
 
-    // let resultDataId;
-    // for (let data in resultData) {
+    let tweetId: string[] = [];
 
-    // data.id
-    // }
+    for (let data in resultData) {
+      // tweetId = [...tweetId, resultData[data].id];
+      tweetId.push(resultData[data].id);
+    }
     console.log(resultData);
-    return this.tweetService.search('#커미션');
+    console.log(resultMeta);
+    console.log(tweetId);
+    return plainToInstance(IPaginationDTO, {
+      data: tweetId,
+      pageInfo: resultMeta,
+    });
   }
-
-  // 	// #커미션 해시태그 단 트윗 불러오기
-  // 	@Get()
-  // 	async findAll(
-  // 		@Query('pageSize') pageSize: number,
-  // 		@Query('pageNo') pageNo: number,
-  // 		@Query('query') query?: string,
-  // 	) {
-  // 		const tweet = await this.tweetService.search('#커미션');
-
-  // 		return plainToInstance(IPaginationDTO, {
-  // 			data: tweet.data.data,
-  // 			meta: tweet.data.meta,
-  // 		});
-  // 	}
 
   // +id number로 치환
   @Get(':id')
