@@ -2,6 +2,21 @@
 
 A website where you can promote commissions on Twitter or find them accurately and conveniently.
 
+## start project
+
+- 기본 start
+
+```
+nest start
+npm run start
+```
+
+- 변화가 있으면 자동으로 restart
+
+```
+npm run start:dev
+```
+
 ## issue
 
 'src/interface' already exists in the index

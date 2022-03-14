@@ -2,52 +2,49 @@ import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { TweetService } from './tweet.service';
 @Controller()
 export class TweetController {
-	constructor(private tweetService: TweetService) { }
 
-	// #커미션 해시태그 단 트윗 불러오기
-	@Get()
-	async findAll() {
-		const result = await this.tweetService.search('#커미션');
-		// console.log('결과', result);
-		const resultData = result.data.data;
+  constructor(private tweetService: TweetService) {}
 
-		// let resultDataId;
-		// for (let data in resultData) {
+  // #커미션 해시태그 단 트윗 불러오기
+  @Get()
+  async findAll(
+    @Query('pageSize') pageSize: number,
+    @Query('pageNo') pageNo: number,
+    @Query('query') query?: string,
+  ) {
+    const result = await this.tweetService.search('#커미션');
 
-		// data.id
-		// }
-		console.log(resultData);
-		return this.tweetService.search('#커미션');
-	}
+    const resultData = result.data.data;
+    const resultMeta = result.data.meta;
 
-	// 	// #커미션 해시태그 단 트윗 불러오기
-	// 	@Get()
-	// 	async findAll(
-	// 		@Query('pageSize') pageSize: number,
-	// 		@Query('pageNo') pageNo: number,
-	// 		@Query('query') query?: string,
-	// 	) {
-	// 		const tweet = await this.tweetService.search('#커미션');
+    let tweetId: string[] = [];
 
-	// 		return plainToInstance(IPaginationDTO, {
-	// 			data: tweet.data.data,
-	// 			meta: tweet.data.meta,
-	// 		});
-	// 	}
+    for (let data in resultData) {
+      // tweetId = [...tweetId, resultData[data].id];
+      tweetId.push(resultData[data].id);
+    }
+    console.log(resultData);
+    console.log(resultMeta);
+    console.log(tweetId);
+    return plainToInstance(IPaginationDTO, {
+      data: tweetId,
+      pageInfo: resultMeta,
+    });
+  }
 
-	// +id number로 치환
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.tweetService.findOne(+id);
-	}
+  // +id number로 치환
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.tweetService.findOne(+id);
+  }
 
-	// @Patch(':id')
-	// update(@Param('id') id: string, @Body() updateTweetDto: UpdateTweetDto) {
-	//   return this.tweetService.update(+id, updateTweetDto);
-	// }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateTweetDto: UpdateTweetDto) {
+  //   return this.tweetService.update(+id, updateTweetDto);
+  // }
 
-	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.tweetService.remove(+id);
-	}
-}
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.tweetService.remove(+id);
+  }
+
