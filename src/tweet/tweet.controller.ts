@@ -3,6 +3,7 @@ import { TweetService } from './tweet.service';
 import { plainToInstance } from 'class-transformer';
 import { TweetDTO } from './dto/tweet.dto';
 import { IPaginationDTO } from 'src/interface/dto/pagination.dto';
+import { Tweetv2SearchParams } from 'twitter-api-v2';
 @Controller()
 export class TweetController {
   constructor(private tweetService: TweetService) {}
@@ -14,7 +15,17 @@ export class TweetController {
     @Query('pageNo') pageNo: number,
     @Query('query') query?: string,
   ) {
-    const result = await this.tweetService.search('#커미션');
+    // 검색 옵션을 service에서 controller로 옮김
+    const options: Partial<Tweetv2SearchParams> = {
+      /** ISO date string */
+      // end_time: string,
+      // start_time: string,
+      max_results: 10,
+      //   since_id: string,
+      //   until_id: string,
+      //   next_token: string,
+    };
+    const result = await this.tweetService.search('#커미션', options);
 
     const resultData = result.data.data;
     const resultMeta = result.data.meta;
