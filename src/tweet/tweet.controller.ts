@@ -14,14 +14,16 @@ export class TweetController {
     @Query('pageSize') pageSize: number,
     @Query('pageNo') pageNo: number,
     @Query('query') query?: string,
+    @Query('lastId') lastId?: string,
   ) {
+    const sinceId: string = lastId + 1;
     // 검색 옵션을 service에서 controller로 옮김
     const options: Partial<Tweetv2SearchParams> = {
       /** ISO date string */
       // end_time: string,
       // start_time: string,
       max_results: 10,
-      //   since_id: string,
+      since_id: sinceId,
       //   until_id: string,
       //   next_token: string,
     };
