@@ -24,7 +24,7 @@ export class TweetController {
         // end_time: string,
         // start_time: string,
         max_results: 10,
-        since_id: `${sinceId ? sinceId : null}`,
+        since_id: sinceId,
         //   until_id: string,
         //   next_token: string,
       };
