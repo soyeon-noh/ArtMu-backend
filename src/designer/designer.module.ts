@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { DesignerService } from './designer.service';
 import { DesignerController } from './designer.controller';
+import { TwitterConfig } from 'src/configs/twitterConfig';
 import { TweetService } from 'src/tweet/tweet.service';
-import { EnvironmentModule } from 'src/environment/environment.module';
 
 @Module({
-	imports: [EnvironmentModule],
 	controllers: [DesignerController],
-	providers: [DesignerService, TweetService]
+	providers: [DesignerService, TweetService, TwitterConfig]
 })
 export class DesignerModule { }

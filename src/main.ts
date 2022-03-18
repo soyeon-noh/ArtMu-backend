@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+// import { twitterConfig } from './configs/twitterConfig';
+import { TwitterApi } from 'twitter-api-v2';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);

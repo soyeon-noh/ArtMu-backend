@@ -1,10 +1,12 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
+  constructor(private readonly appService: AppService) {}
 
-	@Get()
-	home() {
-	}
-
+  @Get()
+  getHello() {
+    return this.appService.getuserByUsername('twitter_ID');
+  }
 }

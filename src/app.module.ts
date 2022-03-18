@@ -1,20 +1,26 @@
-import { Module } from '@nestjs/common';
-import { AppRoutingModule } from './app-routing.module';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TwitterConfig } from './configs/twitterConfig';
 import { DesignerModule } from './designer/designer.module';
-import { EnvironmentModule } from './environment/environment.module';
 import { TweetModule } from './tweet/tweet.module';
+import { AppRoutingModule } from './app-routing.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
 	imports: [
-		AppRoutingModule,
+
+		ConfigModule.forRoot({ isGlobal: true }),
+		MongooseModule.forRoot(process.env.MONGODB_URI),
 		DesignerModule,
 		TweetModule,
+		AppRoutingModule,
+
 	],
-	providers: [AppService],
 	controllers: [AppController],
+	providers: [AppService, TwitterConfig],
 })
 export class AppModule {
 
