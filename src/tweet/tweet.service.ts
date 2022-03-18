@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TwitterConfig } from 'src/configs/twitterConfig';
 import {
+  TweetSearchAllV2Paginator,
   TweetSearchRecentV2Paginator,
   Tweetv2SearchParams,
 } from 'twitter-api-v2';
@@ -13,6 +14,7 @@ export class TweetService {
   async search(
     query: string,
     options?: Partial<Tweetv2SearchParams>,
+    // ): Promise<TweetSearchAllV2Paginator> {
   ): Promise<TweetSearchRecentV2Paginator> {
     // const option: Partial<Tweetv2SearchParams> = {
     //   /** ISO date string */
@@ -25,7 +27,11 @@ export class TweetService {
     // };
     // const endTime: string = null;
     // options = { ...options, end_time: `${endTime}` };
-    return await this.twitterConfig.client.readOnly.v2.search(query, options);
+    return await this.twitterConfig.client.readOnly.v2.search(
+      // return await this.twitterConfig.client.readOnly.v2.searchAll(
+      query,
+      options,
+    );
   }
 
   findAll() {
