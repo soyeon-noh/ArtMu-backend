@@ -16,17 +16,28 @@ export class TweetController {
     @Query('query') query?: string,
     @Query('lastId') lastId?: string,
   ) {
-    const sinceId: string = lastId + 1;
-    // 검색 옵션을 service에서 controller로 옮김
+    if (lastId) {
+      const sinceId: string = lastId + 1;
+      console.log('sinceid', sinceId);
+      const options: Partial<Tweetv2SearchParams> = {
+        /** ISO date string */
+        // end_time: string,
+        // start_time: string,
+        max_results: 10,
+        since_id: `${sinceId ? sinceId : null}`,
+        //   until_id: string,
+        //   next_token: string,
+      };
+    }
     const options: Partial<Tweetv2SearchParams> = {
       /** ISO date string */
       // end_time: string,
       // start_time: string,
       max_results: 10,
-      since_id: sinceId,
-      //   until_id: string,
-      //   next_token: string,
     };
+
+    // 검색 옵션을 service에서 controller로 옮김
+
     const result = await this.tweetService.search('#커미션', options);
 
     const resultData = result.data.data;
